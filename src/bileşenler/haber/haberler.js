@@ -104,6 +104,7 @@ const data = [
     <span class="expandButton">+</span>
   </div>
 
+
   Adım 2: Hala `haberYapici` içindeyiz, span.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
 
@@ -115,3 +116,44 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+function haberYapici(data) {
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const title = document.createElement('h2');
+  title.textContent = data.baslik;
+
+  const date = document.createElement('p');
+  date.classList.add('tarih');
+  date.textContent = data.tarih;
+
+  const firstParagraph = document.createElement('p');
+  firstParagraph.textContent = data.ikinciParagraf;
+
+  const secondParagraph = document.createElement('p');
+  secondParagraph.textContent = data.ikinciParagraf;
+
+  const thirdParagraph = document.createElement('p');
+  thirdParagraph.textContent = data.ucuncuParagraf;
+
+  const expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton');
+  expandButton.textContent = '+';
+
+  expandButton.addEventListener('click', function() {
+    article.classList.toggle('article-open');
+  });
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(firstParagraph);
+  article.appendChild(secondParagraph);
+  article.appendChild(thirdParagraph);
+  article.appendChild(expandButton);
+
+  return article;
+}
+
+
+const articles = document.querySelector(".articles")
+data.map(item => articles.appendChild(haberYapici(item)));
